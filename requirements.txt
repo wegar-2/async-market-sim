@@ -1,0 +1,9 @@
+annotated-types==0.7.0
+numpy==2.4.1
+pandas==3.0.0
+pydantic==2.12.5
+pydantic_core==2.41.5
+python-dateutil==2.9.0.post0
+six==1.17.0
+typing-inspection==0.4.2
+typing_extensions==4.15.0
