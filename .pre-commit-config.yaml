@@ -1,0 +1,14 @@
+repos:
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.1.0  # or latest version
+    hooks:
+      - id: flake8
+
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint check
+        entry: pylint
+        language: system
+        types: [python]
+        args: [async-market-sim]
