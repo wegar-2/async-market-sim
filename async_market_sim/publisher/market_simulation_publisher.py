@@ -54,13 +54,12 @@ class MarketSimulationPublisher:
     def _get_sleep_time(self) -> float:
         if self._tick_freq_config.seed is None:
             return 1 / self._tick_freq_config.arrivals_per_sec
-        else:
-            return float(
-                self._sleep_time_rng.exponential(
-                    scale=1 / self._tick_freq_config.arrivals_per_sec,
-                    size=1
-                )[0]
-            )
+        return float(
+            self._sleep_time_rng.exponential(
+                scale=1 / self._tick_freq_config.arrivals_per_sec,
+                size=1
+            )[0]
+        )
 
     async def _gbm(self, config: GbmConfig):
         value: float = config.start

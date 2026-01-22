@@ -1,0 +1,39 @@
+name: Pylint Check
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  pylint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pylint
+          pip install -r requirements.txt
+
+      - name: Run pylint and save output
+        id: pylint
+        run: |
+          pylint async-market-sim > pylint_output.txt || true
+          echo "::set-output name=score::$(pylint async-market-sim --score=y --exit-zero | grep 'Your code has been rated at' | sed 's/.*rated at \([0-9\.]*\).*/\1/')"
+          cat pylint_output.txt
+
+      - name: Check pylint score
+        if: steps.pylint.outputs.score < 9
+        run: |
+          echo "Pylint score below 9, failing workflow."
+          exit 1
