@@ -28,8 +28,8 @@ jobs:
       - name: Run pylint and save output
         id: pylint
         run: |
-          pylint async-market-sim > pylint_output.txt || true
-          echo "::set-output name=score::$(pylint async-market-sim --score=y --exit-zero | grep 'Your code has been rated at' | sed 's/.*rated at \([0-9\.]*\).*/\1/')"
+          pylint async_market_sim > pylint_output.txt || true
+          echo "::set-output name=score::$(pylint async_market_sim --score=y --exit-zero | grep 'Your code has been rated at' | sed 's/.*rated at \([0-9\.]*\).*/\1/')"
           cat pylint_output.txt
 
       - name: Check pylint score
