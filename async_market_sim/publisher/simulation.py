@@ -10,9 +10,9 @@ from async_market_sim.common.constants import SECONDS_PER_DAY
 from async_market_sim.common.protocol import EventBusProtocol
 from async_market_sim.common.types import (
     StochasticProcess, StochasticProcessConfig)
-from async_market_sim.simulation.config import (
-    GbmConfig, OrnsteinUhlenbeckConfig, TickIntensityConfig)
-from async_market_sim.simulation.event import PriceTickEvent
+from async_market_sim.publisher.config import (
+    GbmConfig, OUConfig, TickIntensityConfig)
+from async_market_sim.publisher.event import PriceTickEvent
 
 logger = logging.getLogger(__name__)
 
@@ -77,11 +77,13 @@ class MarketSimulation:
                         float(value_rng.normal(size=1)[0])
                 )
             )
-            await self._event_bus.publish(event=PriceTickEvent(
+            pu_event = PriceTickEvent(
                 asset_name=self._asset_name,
                 price=value,
                 timestamp=datetime.now()
-            ))
+            )
+            logger.info(f"Price update event occurrence: {str(pu_event)}")
+            await self._event_bus.publish(event=pu_event)
 
-    async def _ou(self, config: OrnsteinUhlenbeckConfig):
+    async def _ou(self, config: OUConfig):
         raise ValueError("Unhandled case! ")

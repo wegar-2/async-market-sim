@@ -16,7 +16,7 @@ class GbmConfig(BaseModel):
         return value
 
 
-class OrnsteinUhlenbeckConfig(BaseModel):
+class OUConfig(BaseModel):
     pass
 
 

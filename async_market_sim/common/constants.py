@@ -10,3 +10,6 @@ STOCH_PROC_SHORTNAME_TO_FULLNAME: Final[dict[StochasticProcess, str]] = {
     "gbm": "Geometric Brownian Motion",
     "ou": "Ornstein-Uhlenbeck (mean-reverting random walk)"
 }
+
+
+DEFAULT_DATETIME_FORMAT: Final[str] = "%Y-%m-%d %H:%M:%S.%f"
