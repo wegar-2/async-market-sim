@@ -6,8 +6,9 @@ from typing import Final, Optional
 
 import numpy as np
 
-from async_market_sim.common.constants import SECONDS_PER_DAY
-from async_market_sim.common.protocol import ABCEventBus
+from async_market_sim.common.constants import (
+    SECONDS_PER_DAY, STOCH_PROC_SHORTNAME_TO_FULLNAME)
+from async_market_sim.common.abcs import ABCEventBus
 from async_market_sim.common.types import (
     StochasticProcess, StochasticProcessConfig)
 from async_market_sim.publisher.config import (
@@ -45,8 +46,11 @@ class MarketSimulationPublisher:
         logger.info(
             f"Starting simulation for asset {self._asset_name}! "
             f"Underlying stochastic process: "
-            f"with parameters:"
+            f"{STOCH_PROC_SHORTNAME_TO_FULLNAME[self._stoch_proc]} "
+            f"with config: {self._tick_freq_config}"
         )
+        if self._stoch_proc == "gbm":
+            await self._gbm(config=self._stoch_proc_config)
 
     def _get_sleep_time(self) -> float:
         if self._tick_freq_config.seed is None:
@@ -54,7 +58,7 @@ class MarketSimulationPublisher:
         else:
             return float(
                 self._sleep_time_rng.exponential(
-                    scale=self._tick_freq_config.arrivals_per_sec,
+                    scale=1 / self._tick_freq_config.arrivals_per_sec,
                     size=1
                 )[0]
             )

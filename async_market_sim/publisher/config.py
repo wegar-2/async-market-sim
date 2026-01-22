@@ -10,7 +10,8 @@ class GbmConfig(BaseModel):
     seed: int = 654_321
 
     @field_validator("sigma_daily")
-    def _validate_sigma_daily(self, value):
+    @classmethod
+    def _validate_sigma_daily(cls, value):
         if value <= 0:
             raise ValueError(f"Received invalid value of sigma_daily: {value}")
         return value

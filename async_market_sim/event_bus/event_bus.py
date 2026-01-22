@@ -1,7 +1,7 @@
 from collections import defaultdict
 from typing import Any, Callable, Type
 
-from async_market_sim.common import ABCEventBus
+from async_market_sim.common.abcs import ABCEventBus
 
 
 class EventBus(ABCEventBus):
