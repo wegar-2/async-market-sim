@@ -7,5 +7,6 @@ logger = logging.getLogger(__name__)
 
 class LogTickSubscriber:
 
-    def log(self, pt_event: PriceTickEvent):
+    @staticmethod
+    def log(pt_event: PriceTickEvent):
         logger.info(str(pt_event))

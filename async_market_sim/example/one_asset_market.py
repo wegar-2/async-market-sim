@@ -1,10 +1,11 @@
 import asyncio
 
-from async_market_sim.event_bus import EventBus
-from async_market_sim.publisher import (
-    MarketSimulationPublisher, GbmConfig, TickIntensityConfig)
-from async_market_sim.subscriber import LogTickSubscriber
-from async_market_sim.publisher import PriceTickEvent
+from async_market_sim.event_bus.event_bus import EventBus
+from async_market_sim.publisher.market_simulation_publisher import (
+    MarketSimulationPublisher)
+from async_market_sim.publisher.config import GbmConfig, TickIntensityConfig
+from async_market_sim.subscriber.log_tick_subscriber import LogTickSubscriber
+from async_market_sim.publisher.event import PriceTickEvent
 
 
 async def one_asset_market():

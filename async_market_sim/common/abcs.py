@@ -1,5 +1,5 @@
 from abc import abstractmethod, ABC
-from typing import Any, Callable, Protocol, Type
+from typing import Any, Callable, Type
 
 
 class ABCEventBus(ABC):

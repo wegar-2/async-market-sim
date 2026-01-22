@@ -41,7 +41,6 @@ class MarketSimulationPublisher:
         if (seed := self._tick_freq_config.seed) is not None:
             self._sleep_time_rng = np.random.default_rng(seed=seed)
 
-
     async def start(self):
         logger.info(
             f"Starting simulation for asset {self._asset_name}! "
