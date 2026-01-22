@@ -2,4 +2,6 @@ from pydantic import BaseModel
 
 
 class PriceTickEvent(BaseModel):
-    pass
+    asset_name: str
+    price: float
+    timestamp: str

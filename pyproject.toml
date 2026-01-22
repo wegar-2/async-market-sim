@@ -1,0 +1,18 @@
+[project]
+name = "async-market-sim"
+version = "0.0.1"
+description = ""
+readme = "README.md"
+requires-python = ">=3.11"
+keywords = ["market", "simulation", "stochastic-process", "gbm", "async"]
+authors = [
+  {name = "Artur Wegrzyn", email = "awegrzyn17@gmail.com" }
+]
+maintainers = [
+  {name = "Artur Wegrzyn", email = "awegrzyn17@gmail.com" }
+]
+dependencies = ["numpy", "pandas", "pydantic"]
+
+[build-system]
+requires = ["setuptools>=70.0.0", "wheel"]
+build-backend = "setuptools.build_meta"

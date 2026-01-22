@@ -1,7 +1,7 @@
 from pydantic import BaseModel, field_validator
 
 
-class GbmSimulationConfig(BaseModel):
+class GbmConfig(BaseModel):
     start_value: float = 100
     mu_daily: float = 0.005
     sigma_daily: float = 0.02
