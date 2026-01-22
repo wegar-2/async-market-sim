@@ -1,8 +1,10 @@
+from abc import abstractmethod, ABC
 from typing import Any, Callable, Protocol, Type
 
 
-class EventBusProtocol(Protocol):
+class ABCEventBus(ABC):
 
+    @abstractmethod
     def subscribe(
             self,
             event_type: Type,
@@ -11,5 +13,6 @@ class EventBusProtocol(Protocol):
     ):
         pass
 
+    @abstractmethod
     async def publish(self, event: Any, **kwargs):
         pass

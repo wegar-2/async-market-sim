@@ -7,7 +7,7 @@ from typing import Final, Optional
 import numpy as np
 
 from async_market_sim.common.constants import SECONDS_PER_DAY
-from async_market_sim.common.protocol import EventBusProtocol
+from async_market_sim.common.protocol import ABCEventBus
 from async_market_sim.common.types import (
     StochasticProcess, StochasticProcessConfig)
 from async_market_sim.publisher.config import (
@@ -17,17 +17,17 @@ from async_market_sim.publisher.event import PriceTickEvent
 logger = logging.getLogger(__name__)
 
 
-class MarketSimulation:
+class MarketSimulationPublisher:
 
     def __init__(
             self,
-            event_bus: EventBusProtocol,
+            event_bus: ABCEventBus,
             asset_name: str,
             stoch_proc: StochasticProcess,
             stoch_proc_config: StochasticProcessConfig,
             tick_freq_config: TickIntensityConfig
     ):
-        self._event_bus: EventBusProtocol = event_bus
+        self._event_bus: ABCEventBus = event_bus
         self._asset_name: Final[str] = asset_name
         if stoch_proc == "ou":
             raise ValueError("OU stochastic process not implemented yet! ")
