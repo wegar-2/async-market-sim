@@ -1,4 +1,5 @@
 import asyncio
+from datetime import datetime
 import logging
 import math
 from typing import Final, Optional
@@ -11,6 +12,7 @@ from async_market_sim.common.types import (
     StochasticProcess, StochasticProcessConfig)
 from async_market_sim.simulation.config import (
     GbmConfig, OrnsteinUhlenbeckConfig, TickIntensityConfig)
+from async_market_sim.simulation.event import PriceTickEvent
 
 logger = logging.getLogger(__name__)
 
@@ -75,6 +77,11 @@ class MarketSimulation:
                         float(value_rng.normal(size=1)[0])
                 )
             )
+            await self._event_bus.publish(event=PriceTickEvent(
+                asset_name=self._asset_name,
+                price=value,
+                timestamp=datetime.now()
+            ))
 
     async def _ou(self, config: OrnsteinUhlenbeckConfig):
         raise ValueError("Unhandled case! ")
